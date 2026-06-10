@@ -1,11 +1,16 @@
-class Solution:
+class Solution(object):
     def climbStairs(self, n):
 
-        if n <= 2:
-            return n
+        memo = {}
 
-        return (
-            self.climbStairs(n - 1)
-            +
-            self.climbStairs(n - 2)
-        )
+        def dfs(n):
+            if n <= 2:
+                return n
+
+            if n in memo:
+                return memo[n]
+
+            memo[n] = dfs(n - 1) + dfs(n - 2)
+            return memo[n]
+
+        return dfs(n)
